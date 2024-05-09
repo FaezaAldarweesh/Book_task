@@ -5,11 +5,13 @@ namespace App\Http\Controllers;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
+use Spatie\Permission\Models\Role;
 use App\Http\Requests\loginRequest;
 use App\Http\Requests\signupRequest;
 use Illuminate\Support\Facades\Hash;
 use App\Http\Traits\ApiResponseTrait;
 use App\Http\Resources\signupResource;
+use Spatie\Permission\Models\Permission;
 
 
 class AuthController extends Controller
@@ -36,6 +38,8 @@ class AuthController extends Controller
             'password' => bcrypt($data['password']),
             'role_name'=>'member',
         ]);
+       
+        $user->assignRole(['name' => 'member']);
 
         $token = $user->createToken('apiToken')->plainTextToken;
 

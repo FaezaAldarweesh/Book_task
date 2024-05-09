@@ -16,6 +16,16 @@ class BookController extends Controller
     public function __construct()
     {
         $this->middleware('auth')->except('all_books','search');
+
+        $this->middleware('permission:book-list|book-create|book-edit|book-delete|book-find_Book', ['only' => ['index']]);
+        $this->middleware('permission:book-create', ['only' => ['create','store']]);
+        $this->middleware('permission:book-edit', ['only' => ['edit','update']]);
+        $this->middleware('permission:book-delete', ['only' => ['destroy']]);
+        $this->middleware('permission:book-find_Book', ['only' => ['find_Book']]);
+
+        $this->middleware('permission:book-all_books', ['only' => ['all_books']]);
+        $this->middleware('permission:book-search', ['only' => ['search']]);
+
     }
     public function index()
     {

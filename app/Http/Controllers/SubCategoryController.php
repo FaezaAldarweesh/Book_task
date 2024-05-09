@@ -11,6 +11,12 @@ class SubCategoryController extends Controller
     public function __construct()
     {
         $this->middleware('auth');
+
+        $this->middleware('permission:subCategory-list|subCategory-create|subCategory-edit|subCategory-delete|find_SubCategory', ['only' => ['index']]);
+        $this->middleware('permission:subCategory-create', ['only' => ['create','store']]);
+        $this->middleware('permission:subCategory-edit', ['only' => ['edit','update']]);
+        $this->middleware('permission:subCategory-delete', ['only' => ['destroy']]);
+        $this->middleware('permission:find_SubCategory', ['only' => ['find_SubCategory']]);
     }
     public function index()
     {

@@ -13,6 +13,14 @@ use App\Http\Traits\favoriteBookResponseTrait;
 class FavoriteBookController extends Controller
 {
     use favoriteBookResponseTrait;
+
+    public function __construct()
+    {
+        $this->middleware('permission:favoriteBook-index|favoriteBook-store|favoriteBook-delete', ['only' => ['index']]);
+        $this->middleware('permission:favoriteBook-store', ['only' => ['store']]);
+        $this->middleware('permission:favoriteBook-delete', ['only' => ['destroy']]);
+
+    }
     public function index()
     {
         $name_user = auth()->user()->name;

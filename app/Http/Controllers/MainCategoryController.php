@@ -10,6 +10,12 @@ class MainCategoryController extends Controller
     public function __construct()
     {
         $this->middleware('auth');
+
+        $this->middleware('permission:mainCategory-list|mainCategory-create|mainCategory-edit|mainCategory-delete|find_MainCategory', ['only' => ['index']]);
+        $this->middleware('permission:mainCategory-create', ['only' => ['create','store']]);
+        $this->middleware('permission:mainCategory-edit', ['only' => ['edit','update']]);
+        $this->middleware('permission:mainCategory-delete', ['only' => ['destroy']]);
+        $this->middleware('permission:find_MainCategory', ['only' => ['find_MainCategory']]);
     }
     
     public function index()

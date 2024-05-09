@@ -42,7 +42,7 @@ class PermissionTableSeeder extends Seeder
 
            'favoriteBook-index',
            'favoriteBook-store',
-           'favoriteBook-edit',
+           'favoriteBook-delete',
 
            'review-index',
            'review-store',

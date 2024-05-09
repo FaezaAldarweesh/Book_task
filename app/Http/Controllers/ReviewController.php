@@ -12,6 +12,14 @@ use App\Http\Traits\ReviewBookResponseTrait;
 class ReviewController extends Controller
 {
     use ReviewBookResponseTrait;
+
+    public function __construct()
+    {
+        $this->middleware('permission:review-index|review-store|review-update|review-delete', ['only' => ['index']]);
+        $this->middleware('permission:review-store', ['only' => ['store']]);
+        $this->middleware('permission:review-update', ['only' => ['update']]);
+        $this->middleware('permission:review-delete', ['only' => ['destroy']]);
+    }
     public function index()
     {
         $name_user = auth()->user()->name;
